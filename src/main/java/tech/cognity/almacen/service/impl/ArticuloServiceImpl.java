@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import tech.cognity.almacen.entity.Articulo;
 import tech.cognity.almacen.repository.ArticuloRepository;
 import tech.cognity.almacen.service.ArticuloService;
+import tech.cognity.almacen.validator.ArticuloValidator;
 
 @Service
 public class ArticuloServiceImpl implements ArticuloService {
@@ -50,6 +51,7 @@ public class ArticuloServiceImpl implements ArticuloService {
 	@Override
 	public Articulo save(Articulo articulo) {
 		try {
+			ArticuloValidator.save(articulo);
 			articulo.setActivo(true);
 			Articulo registro = repository.save(articulo);
 			return registro;
