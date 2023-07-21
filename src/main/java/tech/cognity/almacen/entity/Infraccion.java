@@ -3,7 +3,6 @@ package tech.cognity.almacen.entity;
 import java.util.Date;
 
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
@@ -28,23 +27,23 @@ import lombok.Setter;
 @Builder
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "articulos")
-public class Articulo {
+@Table(name = "infracciones")
+public class Infraccion {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column(unique = true, nullable = false, length = 100)
-	private String nombre;
-	@Column(nullable = false)
-	private Double precio;
-	@Column(name = "created_at", nullable = false, updatable = false)
+	@Column(name="DNI", unique = true, nullable = false, length = 8)
+	private String dni;
+	@Column(nullable = false, updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
-	private Date createdAt;
-	@Column(name = "update_at")
-	@Temporal(TemporalType.TIMESTAMP)
-	@LastModifiedDate
-	private Date updateAt;
+	private Date fecha;
+	@Column(nullable = false, length = 3)
+	private String falta;
+	@Column(nullable = false, length = 200)
+	private String infraccion;
+	@Column(nullable = true, length = 255)
+	private String descripcion;
 	@Column(name = "activo", nullable = false)
 	private Boolean activo;
 }
